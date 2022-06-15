@@ -16,6 +16,8 @@ const signupRouter = require('./routes/user-signup');
 const dashboardNgo = require('./routes/dashboard-ngo');
 const ngoRouter = require('./routes/ngo');
 const ngologinRouter = require('./routes/ngo-login')
+const adminloginRouter = require('./routes/admin-login')
+const dashboardadmin = require('./routes/dashboard-admin')
 const ngoRegister = require('./routes/ngo-signup');
 const ngoJoin = require('./routes/ngoJoinForm');
 const contactRouter = require('./routes/contact');
@@ -50,6 +52,7 @@ app.use(session({
 app.use('/',landingRouter)
 app.use('/login',loginRouter);
 app.use('/dashboard-user',dashboardRouter);
+
 app.use("/signup",signupRouter);
 app.use('/dashboard-ngo',dashboardNgo);
 app.use('/ngo',ngoRouter);
@@ -59,6 +62,9 @@ app.use('/dashboard-user/ngo-list/form',ngoJoin);
 app.use('/contact',contactRouter);
 app.use('/success',thankyouRouter);
 app.use('/db', dbGenerate);
+app.use('/admin-login', adminloginRouter);
+
+app.use('/dashboard-admin', dashboardadmin);
 
 app.get('/ngo',(req,res)=>{
    res.render('./dashboard/ngo',{});

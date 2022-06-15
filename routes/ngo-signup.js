@@ -1,4 +1,5 @@
 var express = require('express');
+const fs = require('fs');
 const connectionModule  = require('../controllers/connection');
 
 const execute = connectionModule.executeQuery;
@@ -6,11 +7,17 @@ var router = express.Router();
 router.post('/', async function(req, res, next) {
   var data = req.body;
   console.log(data);
-  const sqlQuery = `INSERT INTO ngo.ngodata (ngo_name,ngo_mail,ngo_password,ngo_info,government_id,ngo_address,ngo_bank,ngo_account,ngo_ifsccode, image) VALUES('${data.ngo_name}','${data.ngo_email}','${data.ngo_pass}','${data.ngo_information}','${data.ngo_id}','${data.address}','${data.bank_name}','${data.account_no}','${data.ifsc_code}','test')`;
-  await execute(sqlQuery)
-  .then(() => {
-    res.redirect('/');
-  })
+
+  let ngo_req = fs.readFileSync('routes/data_ngo.json');
+  ngo_req = JSON.parse(ngo_req);
+  ngo_req.push(data);
+  fs.writeFileSync('routes/data_ngo.json', JSON.stringify(ngo_req));
+  //const sqlQuery = `INSERT INTO ngo.ngodata (ngo_name,ngo_mail,ngo_password,ngo_info,government_id,ngo_address,ngo_bank,ngo_account,ngo_ifsccode, image) VALUES('${data.ngo_name}','${data.ngo_email}','${data.ngo_pass}','${data.ngo_information}','${data.ngo_id}','${data.address}','${data.bank_name}','${data.account_no}','${data.ifsc_code}','test')`;
+  // yaha pe ek pop message dhikha denge ki your has been send to admin
+  //await execute(sqlQuery)
+  res.redirect('/');
+   
+  
   let mail = data.ngo_email;
   /*
   var token = jwt.sign({ mail }, process.env.secret, {

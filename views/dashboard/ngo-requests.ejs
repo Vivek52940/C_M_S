@@ -1,0 +1,66 @@
+<%- include('home-admin.ejs') -%>
+<link rel="stylesheet" href="/stylesheets/ngo-list.css" >
+<div class="ngo__list">
+    <div class="ngo__name">
+        <img src="/images/arrow.png" alt="arrow"> 
+        <h1>NGO's list</h1> 
+    </div>
+    <div class="ngo__container">
+
+        <% memberData.forEach((data) => { %>
+            <div class="ngo">
+                <div class="ngo__card">
+                   
+                    
+                    <div class="ngo__details">
+                        <h3>Id : <%= data.ngo_id %></h3>
+                        <h3>Name : <%= data.ngo_name %></h3>
+                        <h3>Email : <%= data.ngo_email %></h3>
+                        <a href="/dashboard-admin/ngorequests"><button class="btn__join" id="btn_approve" onclick="approve('<%= data.ngo_id %>')"> Approve </button></a><br>
+                        <% const dataa = data.ngo_id %>
+                        <a href="/dashboard-admin/ngorequests"><button class="btn__join" id="btn_rej" onclick="fun('<%= data.ngo_id %>')" > Reject </button></a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <script>
+
+        // const rej = document.getElementById('btn_rej');
+        // const apr = document.getElementById('btn_approve');
+
+        // rej.addEventListener('click', (data) => {
+
+        //     console.log(data);
+        //     });
+        const fun = async (data) => {
+        const xml = new XMLHttpRequest();
+        const url = "/dashboard-admin/ngorequests/reject";
+            xml.open('POST',url,true);
+            await xml.setRequestHeader("content-type",'application/json');
+           var ob1 = await xml.send(JSON.stringify({
+               ngo_id: data
+           })
+           );
+           
+         
+        }
+
+        const approve = async (data) => {
+        const xml = new XMLHttpRequest();
+        const url = "/dashboard-admin/ngorequests/approve";
+            xml.open('POST',url,true);
+            await xml.setRequestHeader("content-type",'application/json');
+           var ob1 = await xml.send(JSON.stringify({
+               ngo_id: data
+           })
+           );
+           
+         
+        }
+
+        let show = () => {
+            console.log("heelo");
+        }
+    </script>

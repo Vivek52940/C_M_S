@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -12,19 +12,19 @@
         <div class="form">
 			<h1>Create Account</h1>
             <form method="POST" action="/ngo-signup" >
-			<input id="name" type="text" placeholder="Ngo name" name="ngo_name" class="formdata">
-			<input id="email" type="email" placeholder="Email" name="ngo_email" class="formdata" >
-            <input id="govtid" type="text" placeholder="Enter government certified ngo id" name="ngo_id" class="formdata">
-			<input id="pass1" type="password" placeholder="Password" class="formdata" name="ngo_pass">
-            <input id="pass2" type="password" placeholder="Rewrite Password" class="formata" name="ngo_repass">
+			<input id="name" type="text" placeholder="Ngo name" name="ngo_name" class="formdata" required>
+			<input id="email" type="email" placeholder="Email" name="ngo_email" class="formdata" required>
+            <input id="govtid" type="text" placeholder="Enter government certified ngo id" name="ngo_id" class="formdata" required>
+			<input id="pass1" type="password" placeholder="Password" class="formdata" name="ngo_pass" required>
+            <!-- <input id="pass2" type="password" placeholder="Rewrite Password" class="formata" name="ngo_repass" required> -->
             <textarea type="text" rows="7" cols="40" placeholder="input some information about ngo" id="ngo_information" name="ngo_information" class="formdata" value="we works"></textarea>
             <label for="bank details">Enter bank details</label>
             <input type="text" name="bank_name" placeholder="Enter your bank name" id="bank_name" class="formdata" >
             <input type="text" name="ifsc_code" placeholder="Enter your account IFSC code" id="ifsc_code" class="formdata" >
             <input type="text" name="account_no" placeholder="Enter your bank account no" id="account_no" class="formdata" >
-            <input type="date" id="mydate" class="formdata" name="date"> 
+            <!-- <input type="date" id="mydate" class="formdata" name="date">  -->
             <input type="text" placeholder="Enter Address" id="address" class="formdata" name="address" value="asasa sa sas as">
-			<button type="submit" style="cursor:pointer;">Sign Up</button>
+			<button id="submitbutton" type="submit" style="cursor:pointer;">Sign Up</button>
             </form>
             </div>
 	</div>
@@ -60,9 +60,36 @@
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
+    
+    const submitbutton = document.getElementById('submitbutton');
+    submitbutton.addEventListener('click', () => {
+    const id = document.getElementById('govtid');
+    const email = document.getElementById('email')
+    const name = document.getElementById('name')
+    console.log("he;;o")
+    console.log(ValidateEmail(email.value))
+    if(id.value && ValidateEmail(email.value) && name.value){
+        alert('Your form is submitted, waiting for Admin approval');
+        
+    }
+    
+    function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+    alert("You have entered an invalid email address!")
+    return (false)
+}
 
+    
+    
+});
     signUpButton.addEventListener('click', () => {
+    
         container.classList.add("right-panel-active");
+        
     });
     signInButton.addEventListener('click', () => {
         container.classList.remove("right-panel-active");

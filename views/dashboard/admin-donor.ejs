@@ -1,0 +1,43 @@
+<%- include('home-admin.ejs'); -%>
+    <link rel="stylesheet" href="/stylesheets/donor.css" />
+    <div class="donor_table">
+        <div class="header">
+            <h1> <img class="arrow" src="/images/arrow.png" alt=""></h1>
+        </div>
+        <div class="total__amount" >
+            <span>
+            <h1 style="display: inline;">Total amount gathered so far: </h1>
+            <h1 style="display: inline;"> &#x20B9; <%- total %> </h1>
+            </span>
+        </div>
+        <div class="table__donor">
+            <table style="width:800px ; height: 100px;">
+                <tr>
+                    <th>
+                        <h2 id="table_heading">Donor</h2>
+                    </th>
+                    <th>
+                        <h2 id="table_heading">Amount</h2>
+                    </th>
+                    <th>
+                        <h2 id="table_heading">NGO</h2>
+                    </th>
+
+                </tr>
+                <div class="table_element">
+                    <% donationData.forEach((donor) =>{ %>
+                        <tr>
+                        
+                            <th class="border1">  <%- donor.donor_name %></th>
+                      
+                            <th class="border2"> &#x20B9; <%- donor.amount %></th>
+                            <th class="border2"><%- donor.ngo_name %></th>
+                        </tr>
+                   <% }) %>
+                </div>
+
+            </table>
+
+        </div>
+
+    </div>
