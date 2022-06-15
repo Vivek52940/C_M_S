@@ -1,4 +1,4 @@
-# NGO-Database-Management
+# Charity-Management-System
 App:
 ![image](images/1.png)
 ![image](images/2.png)
